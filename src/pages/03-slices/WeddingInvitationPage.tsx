@@ -1,8 +1,19 @@
 import { WhiteCard } from '../../components';
+import { useWeddingStore } from '../../stores/wedding';
 
 
 
 export const WeddingInvitationPage = () => {
+
+  const firstName = useWeddingStore(state => state.firstName);
+  const lastName = useWeddingStore(state => state.lastName);
+
+  const setFirstName = useWeddingStore(state => state.setFirstName);
+  const setLastName = useWeddingStore(state => state.setLastName);
+
+  const guestCount = useWeddingStore( state => state.guestCount );
+  const setGuestCount = useWeddingStore( state => state.setGuestCount )
+
   return (
     <>
       <h1>Invitación de Boda</h1>
@@ -24,7 +35,9 @@ export const WeddingInvitationPage = () => {
                     type="text"
                     name="firstName"
                     id="firstName"
-                    placeholder="Primer Nombre"
+                    placeholder="Nombre"
+                    value={firstName}
+                    onChange={ (e) => setFirstName(e.target.value) }
                   />
                 </div>
               </div>
@@ -40,6 +53,8 @@ export const WeddingInvitationPage = () => {
                     name="lastName"
                     id="lastName"
                     placeholder="Apellido"
+                    value={lastName}
+                    onChange={ (e) => setLastName(e.target.value) }
                   />
                 </div>
               </div>
@@ -57,6 +72,8 @@ export const WeddingInvitationPage = () => {
                 placeholder="5"
                 min="0"
                 className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                value={ guestCount }
+                onChange={ (e) => setGuestCount( +e.target.value ) } // + Para tranformar en numero
               />
             </div>
 
